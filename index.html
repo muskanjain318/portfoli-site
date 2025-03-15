@@ -10,60 +10,456 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
 <style>
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
-  }
-  .floating { animation: float 6s ease-in-out infinite; }
-  .nav-link::after {
-    content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
-    background-color: #3B82F6; transition: width 0.3s ease;
-  }
-  .nav-link:hover::after { width: 100%; }
+:where([class^="ri-"])::before { content: "\f3c2"; }
+@keyframes float {
+0% { transform: translateY(0px); }
+50% { transform: translateY(-20px); }
+100% { transform: translateY(0px); }
+}
+@keyframes typing {
+from { width: 0 }
+to { width: 100% }
+}
+.typing-effect {
+overflow: hidden;
+white-space: nowrap;
+animation: typing 3.5s steps(40, end);
+}
+.floating { animation: float 6s ease-in-out infinite; }
+.nav-link {
+position: relative;
+text-decoration: none;
+}
+.nav-link::after {
+content: '';
+position: absolute;
+width: 0;
+height: 2px;
+bottom: -4px;
+left: 0;
+background-color: #3B82F6;
+transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+width: 100%;
+}
+.project-card {
+transition: transform 0.3s ease;
+}
+.project-card:hover {
+transform: translateY(-10px);
+}
 </style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#3B82F6',
+secondary: '#60A5FA'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
 </head>
 <body class="bg-white font-['Inter']">
-  <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-      <span class="text-2xl font-['Pacifico'] text-primary cursor-pointer">Muskan Jain</span>
-      <div class="hidden md:flex space-x-8">
-        <span class="nav-link text-gray-700 hover:text-primary cursor-pointer">Home</span>
-        <span class="nav-link text-gray-700 hover:text-primary cursor-pointer">About</span>
-        <span class="nav-link text-gray-700 hover:text-primary cursor-pointer">Projects</span>
-        <span class="nav-link text-gray-700 hover:text-primary cursor-pointer">Contact</span>
-      </div>
-      <button class="md:hidden text-gray-500 hover:text-gray-700" onclick="toggleMobileMenu()">
-        <i class="ri-menu-line ri-2x"></i>
-      </button>
-    </div>
-    <div id="mobileMenu" class="hidden md:hidden px-2 pt-2 pb-3 space-y-1">
-      <span class="block px-3 py-2 text-base text-gray-700 hover:text-primary">Home</span>
-      <span class="block px-3 py-2 text-base text-gray-700 hover:text-primary">About</span>
-      <span class="block px-3 py-2 text-base text-gray-700 hover:text-primary">Projects</span>
-      <span class="block px-3 py-2 text-base text-gray-700 hover:text-primary">Contact</span>
-    </div>
-  </nav>
-  <section class="pt-32 pb-20 px-4 bg-gradient-to-br from-blue-50 to-white text-center md:text-left">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-      <div class="space-y-8">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900">Hi, I'm Muskan Jain</h1>
-        <p class="text-xl sm:text-2xl text-gray-600">Frontend Engineer</p>
-        <p class="text-base sm:text-lg text-gray-600">Crafting beautiful and performant web experiences.</p>
-        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-          <button class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-600">View Projects</button>
-          <a href="#" class="px-6 py-3 border border-primary text-primary rounded-lg hover:bg-blue-50 text-center">Hire Me</a>
-        </div>
-      </div>
-      <div class="floating">
-        <img src="https://public.readdy.ai/ai/img_res/ad794773960c6c1a457e655bbdd1cb10.jpg" alt="Development Skills" class="w-full max-w-md mx-auto">
-      </div>
-    </div>
-  </section>
-</body>
+<nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16">
+<div class="flex items-center">
+<span class="text-2xl font-['Pacifico'] text-primary cursor-pointer" onclick="scrollToTop()">Muskan Jain</span>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<span onclick="scrollToSection('home')" class="nav-link text-gray-700 hover:text-primary cursor-pointer">Home</span>
+<span onclick="scrollToSection('about')" class="nav-link text-gray-700 hover:text-primary cursor-pointer">About</span>
+<span onclick="scrollToSection('projects')" class="nav-link text-gray-700 hover:text-primary cursor-pointer">Projects</span>
+<span onclick="scrollToSection('contact')" class="nav-link text-gray-700 hover:text-primary cursor-pointer">Contact</span>
+</div>
+</div>
+</div>
+</nav>
+<section id="home" class="pt-32 pb-20 px-4 bg-gradient-to-br from-blue-50 to-white">
+<div class="max-w-7xl mx-auto">
+<div class="grid md:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<h1 class="text-5xl md:text-6xl font-bold text-gray-900 typing-effect">
+Hi, I'm Muskan Jain
+</h1>
+<p class="text-2xl text-gray-600">Frontend Engineer</p>
+<p class="text-lg text-gray-600">
+Crafting beautiful and performant web experiences with modern technologies.
+</p>
+<div class="flex space-x-4">
+<button onclick="scrollToSection('projects')" class="px-6 py-3 bg-primary text-white !rounded-button hover:bg-blue-600 transition duration-300 cursor-pointer">View Projects</button>
+<a href="https://www.linkedin.com/in/muskan-jain-b47aba207/" target="_blank" class="px-6 py-3 border border-primary text-primary !rounded-button hover:bg-blue-50 transition duration-300 cursor-pointer">Hire Me</a>
+</div>
+</div>
+<div class="floating">
+<img src="https://public.readdy.ai/ai/img_res/ad794773960c6c1a457e655bbdd1cb10.jpg" alt="Development Skills" class="w-full">
+</div>
+</div>
+</div>
+</section>
+<section id="about" class="py-20 px-4 bg-white">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold text-center mb-16">About Me</h2>
+<div class="grid md:grid-cols-2 gap-12">
+<div>
+<h3 class="text-2xl font-semibold mb-6">Professional Summary</h3>
+<p class="text-gray-600 leading-relaxed mb-6">
+I'm a passionate Frontend Engineer with expertise in building responsive and user-friendly web applications. With a strong foundation in modern web technologies and a keen eye for design, I create seamless digital experiences that users love. I'm also proficient in utilizing various AI tools for Web and UI/UX design, including UIZard.io, napkin.ai, ChatGPT, and godly.website for rapid prototyping and design ideation, leveraging these cutting-edge AI technologies to enhance design workflows and create innovative solutions.
+</p>
+<div class="space-y-4">
+<div class="flex items-center space-x-2">
+<i class="ri-check-line text-primary"></i>
+<span>3+ years of professional experience</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-check-line text-primary"></i>
+<span>20+ successful projects delivered</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-check-line text-primary"></i>
+<span>Strong problem-solving abilities</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-2xl font-semibold mb-6">Technical Skills</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="w-12 h-12 mb-3 flex items-center justify-center">
+<i class="ri-html5-line ri-2x text-primary"></i>
+</div>
+<h4 class="font-medium">HTML/CSS</h4>
+</div>
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="w-12 h-12 mb-3 flex items-center justify-center">
+<i class="ri-reactjs-line ri-2x text-primary"></i>
+</div>
+<h4 class="font-medium">React.js</h4>
+</div>
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="w-12 h-12 mb-3 flex items-center justify-center">
+<i class="ri-javascript-line ri-2x text-primary"></i>
+</div>
+<h4 class="font-medium">JavaScript</h4>
+</div>
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="w-12 h-12 mb-3 flex items-center justify-center">
+<i class="ri-layout-masonry-line ri-2x text-primary"></i>
+</div>
+<h4 class="font-medium">UI/UX Design</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="projects" class="py-20 px-4 bg-gray-50">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold text-center mb-16">My Projects</h2>
+<div class="flex justify-center mb-12">
+<div class="inline-flex p-1 space-x-1 bg-white rounded-full">
+<button class="px-6 py-2 text-sm font-medium rounded-full hover:bg-gray-100" onclick="switchTab('javascript')">JavaScript</button>
+<button class="px-6 py-2 text-sm font-medium rounded-full hover:bg-gray-100" onclick="switchTab('html')">HTML</button>
+<button class="px-6 py-2 text-sm font-medium rounded-full bg-primary text-white" onclick="switchTab('react')">React</button>
+<button class="px-6 py-2 text-sm font-medium rounded-full hover:bg-gray-100" onclick="switchTab('figma')">Figma</button>
+<button class="px-6 py-2 text-sm font-medium rounded-full hover:bg-gray-100" onclick="switchTab('animation')">Animation</button>
+</div>
+</div>
+<div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Projects will be dynamically inserted here -->
+</div>
+</div>
+</section>
+<section id="experience" class="py-20 px-4 bg-white">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold text-center mb-16">Experience & Education</h2>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="bg-white rounded-lg shadow-lg p-8">
+<h3 class="text-2xl font-semibold mb-6">Work Experience</h3>
+<div class="space-y-6">
+<div>
+<h4 class="text-lg font-medium text-primary">Saas Developer</h4>
+<p class="text-gray-600">Meritto (formerly Nopaperforms) • Feb 2023 - Present</p>
+<p class="text-gray-600">Gurugram/Gurgaon</p>
+</div>
+<div>
+<h4 class="text-lg font-medium text-primary">Full Stack Developer</h4>
+<p class="text-gray-600">Zucol Services Pvt Ltd • Mar 2022 - Dec 2022</p>
+<p class="text-gray-600">Jaipur</p>
+</div>
+<div>
+<h4 class="text-lg font-medium text-primary">Web Developer and Designer Intern</h4>
+<p class="text-gray-600">Protovo Solutions • 2021</p>
+<p class="text-gray-600">Jaipur</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-lg p-8">
+<h3 class="text-2xl font-semibold mb-6">Education</h3>
+<div class="space-y-6">
+<div>
+<h4 class="text-lg font-medium text-primary">Master of Computer Applications (MCA)</h4>
+<p class="text-gray-600">Rajasthan Technical University, Kota • 2020 - 2022</p>
+<p class="mt-2 text-gray-600">CGPA: 9.57</p>
+</div>
+<div>
+<h4 class="text-lg font-medium text-primary">Bachelor of Computer Applications (BCA)</h4>
+<p class="text-gray-600">Banasthali Vidhyapeeth • 2017 - 2020</p>
+<p class="mt-2 text-gray-600">CGPA: 7.24</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="services" class="py-20 px-4 bg-gray-50">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl font-bold text-center mb-16">Services</h2>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="bg-white rounded-lg shadow-lg p-6 text-center">
+<div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+<i class="ri-palette-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Portfolio Creation</h3>
+<p class="text-gray-600">Custom portfolio websites that showcase your work professionally</p>
+</div>
+<div class="bg-white rounded-lg shadow-lg p-6 text-center">
+<div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+<i class="ri-layout-2-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Web Design</h3>
+<p class="text-gray-600">Modern and responsive web designs that engage users</p>
+</div>
+<div class="bg-white rounded-lg shadow-lg p-6 text-center">
+<div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+<i class="ri-pencil-ruler-2-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Wireframe Designing</h3>
+<p class="text-gray-600">Detailed wireframes and prototypes for seamless user experience</p>
+</div>
+<div class="bg-white rounded-lg shadow-lg p-6 text-center">
+<div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+<i class="ri-draft-line ri-2x text-primary"></i>
+</div>
+<h3 class="text-xl font-semibold mb-4">Academic Content Writing</h3>
+<p class="text-gray-600">Well-researched and engaging academic content</p>
+</div>
+</div>
+</div>
+</section>
+<section id="contact" class="py-20 px-4 bg-white">
+<div class="max-w-3xl mx-auto text-center">
+<h2 class="text-4xl font-bold mb-16">Let's Work Together</h2>
+<div class="flex flex-wrap justify-center gap-6">
+<a href="tel:9571604864" class="flex items-center space-x-2 text-gray-600 hover:text-primary">
+<i class="ri-phone-line"></i>
+<span>+91 9571604864</span>
+</a>
+<a href="mailto:jainmuskan1708@gmail.com" class="flex items-center space-x-2 text-gray-600 hover:text-primary">
+<i class="ri-mail-line"></i>
+<span>jainmuskan1708@gmail.com</span>
+</a>
+</div>
+<div class="mt-8">
+<a href="https://drive.google.com/file/d/1sQG_xq-Y_Zp4CNvJHUFZakWa2b9-qTJh/view?usp=sharing"
+target="_blank" download class="px-6 py-3 bg-primary text-white !rounded-button hover:bg-blue-600 transition duration-300 inline-block">
+Download CV
+</a>
+</div>
+</div>
+</section>
+<footer class="bg-gray-900 text-white py-12">
+<div class="max-w-7xl mx-auto px-4">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<div class="text-2xl font-['Pacifico'] mb-4 md:mb-0">Muskan Jain</div>
+<div class="flex space-x-6">
+<a href="https://github.com/muskanjain318" target="_blank" class="hover:text-primary transition duration-300">
+<i class="ri-github-fill ri-xl"></i>
+</a>
+<a href="https://www.linkedin.com/in/muskan-jain-b47aba207/" target="_blank" class="hover:text-primary transition duration-300">
+<i class="ri-linkedin-fill ri-xl"></i>
+</a>
+<a href="https://www.behance.net/muskanjain45" target="_blank" class="hover:text-primary transition duration-300">
+<i class="ri-behance-fill ri-xl"></i>
+</a>
+</div>
+</div>
+<div class="text-center mt-8 text-gray-400">
+© 2025 Muskan Jain. All rights reserved.
+</div>
+</div>
+</footer>
 <script>
-  function toggleMobileMenu() {
-    document.getElementById('mobileMenu').classList.toggle('hidden');
-  }
+function scrollToSection(sectionId) {
+const section = document.getElementById(sectionId);
+if (section) {
+section.scrollIntoView({ behavior: 'smooth' });
+}
+}
+function scrollToTop() {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+}
+const projects = {
+react: [
+{
+title: "Basic React App",
+description: "A foundational React application showcasing core concepts and implementations",
+image: "https://public.readdy.ai/ai/img_res/8bdeb0fdefc3a6d22a8e8cc7723811c0.jpg",
+github: "https://github.com/muskanjain318/01BasicReact",
+demo: "#"
+}
+],
+javascript: [
+{
+title: "Color Change App",
+description: "Interactive color changing application built with pure JavaScript",
+image: "https://public.readdy.ai/ai/img_res/6f22264769e81beb10b89446ad922d74.jpg",
+github: "https://github.com/muskanjain318/ColorChangeByJS",
+demo: "#"
+},
+{
+title: "JavaScript Basics",
+description: "Collection of fundamental JavaScript concepts and implementations",
+image: "https://public.readdy.ai/ai/img_res/27b2c24c7bd5210616f20202e3ccd75f.jpg",
+github: "https://github.com/muskanjain318/Javascript-Basics",
+demo: "#"
+},
+{
+title: "Student Grading System",
+description: "Academic grading management system built with JavaScript",
+image: "https://public.readdy.ai/ai/img_res/450b2a30b64b11a062aa04e7d1513de5.jpg",
+github: "https://github.com/muskanjain318/Student_Grading_System_By_JS",
+demo: "#"
+}
+],
+html: [
+{
+title: "Trefa E-commerce Website",
+description: "Modern e-commerce website with responsive design",
+image: "https://public.readdy.ai/ai/img_res/f6d5bde674039f50750dd872649adb0e.jpg",
+behance: "https://www.behance.net/gallery/219356249/Trefa-Ecom-Website"
+},
+{
+title: "Portfolio Website",
+description: "Personal portfolio website with modern UI",
+image: "https://public.readdy.ai/ai/img_res/a00ee40a2bd85a2cdafa88a48fd4433a.jpg",
+behance: "https://www.behance.net/gallery/200025005/Portfolio"
+}
+],
+figma: [
+{
+title: "Uber Clone",
+description: "UI/UX design for ride-sharing application",
+image: "https://public.readdy.ai/ai/img_res/5fc75941a7db2906e42f0d3152d0566b.jpg",
+behance: "https://www.behance.net/gallery/200518389/Uber-Clone"
+},
+{
+title: "Bento Design",
+description: "Modern bento-style web design",
+image: "https://public.readdy.ai/ai/img_res/1272a941d0542ba660f30b8fec6712f9.jpg",
+behance: "https://www.behance.net/gallery/203459845/Bento-Design"
+},
+{
+title: "Headphones Website",
+description: "E-commerce website design for headphones",
+image: "https://public.readdy.ai/ai/img_res/da74607dc10932e187ec81fd41cef6ef.jpg",
+behance: "https://www.behance.net/gallery/203686245/Headphones-website"
+}
+],
+animation: [
+{
+title: "Mobile Image Slider",
+description: "Animated mobile image slider design",
+image: "https://public.readdy.ai/ai/img_res/7af0cff756e684820ff4c8437c905fa0.jpg",
+behance: "https://www.behance.net/gallery/203125473/Mobile-Image-Slider"
+},
+{
+title: "Slide Animation",
+description: "Smooth slide transition animations",
+image: "https://public.readdy.ai/ai/img_res/88fd00b805d293d95d706c585a8a139c.jpg",
+behance: "https://www.behance.net/gallery/203122045/Slide-Animation"
+},
+{
+title: "Business Animations",
+description: "Business-focused motion design",
+image: "https://public.readdy.ai/ai/img_res/5910aee8875ef03b6efceb872e103142.jpg",
+behance: "https://www.behance.net/gallery/204408901/Business"
+}
+]
+};
+function createProjectCard(project, type) {
+const card = document.createElement('div');
+card.className = 'bg-white rounded-lg overflow-hidden shadow-lg project-card';
+let content = `
+<img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover">
+<div class="p-6">
+<h3 class="text-xl font-semibold mb-2">${project.title}</h3>
+<p class="text-gray-600 mb-4">${project.description}</p>
+<div class="flex space-x-4">
+`;
+if (type === 'figma' || type === 'html' || type === 'animation') {
+content += `
+<a href="${project.behance}" class="flex items-center text-primary hover:text-blue-600">
+<i class="ri-behance-fill mr-2"></i>
+View on Behance
+</a>
+`;
+} else {
+content += `
+<a href="${project.github}" class="flex items-center text-primary hover:text-blue-600">
+<i class="ri-github-fill mr-2"></i>
+GitHub
+</a>
+<a href="${project.demo}" class="flex items-center text-primary hover:text-blue-600">
+<i class="ri-external-link-line mr-2"></i>
+Live Demo
+</a>
+`;
+}
+content += `
+</div>
+</div>
+`;
+card.innerHTML = content;
+return card;
+}
+function switchTab(tab) {
+const grid = document.getElementById('projectsGrid');
+grid.innerHTML = '';
+const buttons = document.querySelectorAll('#projects button');
+buttons.forEach(button => {
+if (button.textContent.toLowerCase() === tab) {
+button.classList.add('bg-primary', 'text-white');
+} else {
+button.classList.remove('bg-primary', 'text-white');
+}
+});
+projects[tab].forEach(project => {
+grid.appendChild(createProjectCard(project, tab));
+});
+}
+document.addEventListener('DOMContentLoaded', () => {
+switchTab('react');
+});
 </script>
+</body>
 </html>
