@@ -88,26 +88,39 @@ DEFAULT: '8px',
 <span onclick="scrollToSection('projects')" class="nav-link text-gray-700 hover:text-primary cursor-pointer">Projects</span>
 <span onclick="scrollToSection('contact')" class="nav-link text-gray-700 hover:text-primary cursor-pointer">Contact</span>
 </div>
+<div class="md:hidden flex items-center">
+<button onclick="toggleMobileMenu()" class="text-gray-500 hover:text-gray-700">
+<i class="ri-menu-line ri-2x"></i>
+</button>
+</div>
+</div>
+</div>
+<div id="mobileMenu" class="hidden md:hidden">
+<div class="px-2 pt-2 pb-3 space-y-1">
+<span onclick="scrollToSection('home');closeMobileMenu()" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary cursor-pointer">Home</span>
+<span onclick="scrollToSection('about');closeMobileMenu()" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary cursor-pointer">About</span>
+<span onclick="scrollToSection('projects');closeMobileMenu()" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary cursor-pointer">Projects</span>
+<span onclick="scrollToSection('contact');closeMobileMenu()" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary cursor-pointer">Contact</span>
 </div>
 </div>
 </nav>
 <section id="home" class="pt-32 pb-20 px-4 bg-gradient-to-br from-blue-50 to-white">
 <div class="max-w-7xl mx-auto">
 <div class="grid md:grid-cols-2 gap-12 items-center">
-<div class="space-y-8">
-<h1 class="text-5xl md:text-6xl font-bold text-gray-900 typing-effect">
+<div class="space-y-8 text-center md:text-left">
+<h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 typing-effect">
 Hi, I'm Muskan Jain
 </h1>
-<p class="text-2xl text-gray-600">Frontend Engineer</p>
-<p class="text-lg text-gray-600">
+<p class="text-xl sm:text-2xl text-gray-600">Frontend Engineer</p>
+<p class="text-base sm:text-lg text-gray-600">
 Crafting beautiful and performant web experiences with modern technologies.
 </p>
-<div class="flex space-x-4">
-<button onclick="scrollToSection('projects')" class="px-6 py-3 bg-primary text-white !rounded-button hover:bg-blue-600 transition duration-300 cursor-pointer">View Projects</button>
-<a href="https://www.linkedin.com/in/muskan-jain-b47aba207/" target="_blank" class="px-6 py-3 border border-primary text-primary !rounded-button hover:bg-blue-50 transition duration-300 cursor-pointer">Hire Me</a>
+<div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 items-center justify-center md:justify-start">
+<button onclick="scrollToSection('projects')" class="w-full sm:w-auto px-6 py-3 bg-primary text-white !rounded-button hover:bg-blue-600 transition duration-300 cursor-pointer">View Projects</button>
+<a href="https://www.linkedin.com/in/muskan-jain-b47aba207/" target="_blank" class="w-full sm:w-auto px-6 py-3 border border-primary text-primary !rounded-button hover:bg-blue-50 transition duration-300 cursor-pointer text-center">Hire Me</a>
 </div>
 </div>
-<div class="floating">
+<div class="floating order-first md:order-last">
 <img src="https://public.readdy.ai/ai/img_res/ad794773960c6c1a457e655bbdd1cb10.jpg" alt="Development Skills" class="w-full">
 </div>
 </div>
@@ -172,13 +185,13 @@ I'm a passionate Frontend Engineer with expertise in building responsive and use
 <section id="projects" class="py-20 px-4 bg-gray-50">
 <div class="max-w-7xl mx-auto">
 <h2 class="text-4xl font-bold text-center mb-16">My Projects</h2>
-<div class="flex justify-center mb-12">
-<div class="inline-flex p-1 space-x-1 bg-white rounded-full">
-<button class="px-6 py-2 text-sm font-medium rounded-full hover:bg-gray-100" onclick="switchTab('javascript')">JavaScript</button>
-<button class="px-6 py-2 text-sm font-medium rounded-full hover:bg-gray-100" onclick="switchTab('html')">HTML</button>
-<button class="px-6 py-2 text-sm font-medium rounded-full bg-primary text-white" onclick="switchTab('react')">React</button>
-<button class="px-6 py-2 text-sm font-medium rounded-full hover:bg-gray-100" onclick="switchTab('figma')">Figma</button>
-<button class="px-6 py-2 text-sm font-medium rounded-full hover:bg-gray-100" onclick="switchTab('animation')">Animation</button>
+<div class="flex justify-center mb-12 overflow-x-auto">
+<div class="inline-flex p-1 space-x-1 bg-white rounded-full flex-wrap sm:flex-nowrap">
+<button class="px-4 sm:px-6 py-2 text-sm font-medium rounded-full whitespace-nowrap hover:bg-gray-100" onclick="switchTab('javascript')">JavaScript</button>
+<button class="px-4 sm:px-6 py-2 text-sm font-medium rounded-full whitespace-nowrap hover:bg-gray-100" onclick="switchTab('html')">HTML</button>
+<button class="px-4 sm:px-6 py-2 text-sm font-medium rounded-full whitespace-nowrap bg-primary text-white" onclick="switchTab('react')">React</button>
+<button class="px-4 sm:px-6 py-2 text-sm font-medium rounded-full whitespace-nowrap hover:bg-gray-100" onclick="switchTab('figma')">Figma</button>
+<button class="px-4 sm:px-6 py-2 text-sm font-medium rounded-full whitespace-nowrap hover:bg-gray-100" onclick="switchTab('animation')">Animation</button>
 </div>
 </div>
 <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -265,29 +278,28 @@ I'm a passionate Frontend Engineer with expertise in building responsive and use
 </section>
 <section id="contact" class="py-20 px-4 bg-white">
 <div class="max-w-3xl mx-auto text-center">
-<h2 class="text-4xl font-bold mb-16">Let's Work Together</h2>
-<div class="flex flex-wrap justify-center gap-6">
+<h2 class="text-3xl sm:text-4xl font-bold mb-16">Let's Work Together</h2>
+<div class="flex flex-col sm:flex-row justify-center items-center gap-6">
 <a href="tel:9571604864" class="flex items-center space-x-2 text-gray-600 hover:text-primary">
 <i class="ri-phone-line"></i>
-<span>+91 9571604864</span>
+<span class="text-sm sm:text-base">+91 9571604864</span>
 </a>
 <a href="mailto:jainmuskan1708@gmail.com" class="flex items-center space-x-2 text-gray-600 hover:text-primary">
 <i class="ri-mail-line"></i>
-<span>jainmuskan1708@gmail.com</span>
+<span class="text-sm sm:text-base break-all sm:break-normal">jainmuskan1708@gmail.com</span>
 </a>
 </div>
 <div class="mt-8">
-<a href="https://drive.google.com/file/d/1sQG_xq-Y_Zp4CNvJHUFZakWa2b9-qTJh/view?usp=sharing"
-target="_blank" download class="px-6 py-3 bg-primary text-white !rounded-button hover:bg-blue-600 transition duration-300 inline-block">
+<a href="/path-to-your-cv.pdf" download class="w-full sm:w-auto px-6 py-3 bg-primary text-white !rounded-button hover:bg-blue-600 transition duration-300 inline-block">
 Download CV
 </a>
 </div>
 </div>
 </section>
-<footer class="bg-gray-900 text-white py-12">
+<footer class="bg-gray-900 text-white py-8 sm:py-12">
 <div class="max-w-7xl mx-auto px-4">
-<div class="flex flex-col md:flex-row justify-between items-center">
-<div class="text-2xl font-['Pacifico'] mb-4 md:mb-0">Muskan Jain</div>
+<div class="flex flex-col sm:flex-row justify-between items-center">
+<div class="text-xl sm:text-2xl font-['Pacifico'] mb-4 sm:mb-0">Muskan Jain</div>
 <div class="flex space-x-6">
 <a href="https://github.com/muskanjain318" target="_blank" class="hover:text-primary transition duration-300">
 <i class="ri-github-fill ri-xl"></i>
@@ -300,12 +312,20 @@ Download CV
 </a>
 </div>
 </div>
-<div class="text-center mt-8 text-gray-400">
+<div class="text-center mt-6 sm:mt-8 text-sm sm:text-base text-gray-400">
 © 2025 Muskan Jain. All rights reserved.
 </div>
 </div>
 </footer>
 <script>
+function toggleMobileMenu() {
+const mobileMenu = document.getElementById('mobileMenu');
+mobileMenu.classList.toggle('hidden');
+}
+function closeMobileMenu() {
+const mobileMenu = document.getElementById('mobileMenu');
+mobileMenu.classList.add('hidden');
+}
 function scrollToSection(sectionId) {
 const section = document.getElementById(sectionId);
 if (section) {
